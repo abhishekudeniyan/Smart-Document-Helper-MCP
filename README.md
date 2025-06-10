@@ -1,4 +1,4 @@
-# SmartDoc MCP Pro
+# SmartDoc MCP 
 
 A powerful document processing and analysis tool with AI capabilities.
 
@@ -6,7 +6,6 @@ A powerful document processing and analysis tool with AI capabilities.
 - Document Processing (PDF, DOCX, TXT)
 - AI-powered Summarization
 - Question Answering
-- Entity Recognition
 - Visual Knowledge Graph
 
 ## Quick Start
@@ -32,12 +31,6 @@ sudo apt-get update && sudo apt-get install -y graphviz libgl1-mesa-glx libglib2
 python main.py
 ```
 
-The application will be available at http://localhost:7860
-
-Default credentials:
-- Username: admin
-- Password: mcp@2024
-
 ## Server Deployment
 
 1. Make the launch script executable:
@@ -50,10 +43,6 @@ chmod +x launch.sh
 ./launch.sh
 ```
 
-## Environment Variables (Optional)
-- `GRADIO_SERVER_NAME`: Server host (default: "0.0.0.0")
-- `GRADIO_SERVER_PORT`: Server port (default: 7860)
-- `SHARE`: Enable public URL (default: false)
 
 ## System Requirements
 - Python 3.8+
