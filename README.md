@@ -34,8 +34,8 @@ An intelligent document processing application powered by AI, built with Gradio 
 
 - **Frontend**: Gradio 4.0+ with custom CSS styling
 - **AI Models**: 
-  - Summarization: `facebook/bart-large-cnn` (fallback: `t5-small`)
-  - Q&A: `distilbert-base-cased-distilled-squad` (fallback: `deepset/roberta-base-squad2`)
+  - Summarization: `google/pegasus-xsum` 
+  - Q&A: `deepset/roberta-base-squad2`
 - **Document Processing**: PyMuPDF, python-docx
 - **Visualization**:
 
