@@ -3,41 +3,12 @@
 
 An intelligent document processing application powered by AI, built with Gradio and implementing Model Context Protocol (MCP) for seamless integration.
 
-## 🚀 Features
-
-### 🛠️ Three Core MCP Tools:
-
-1. **📄 Document Summarizer** 
-   - AI-powered text summarization using BART-Large-CNN
-   - Compression ratio tracking
-   - Support for PDF, DOCX, and TXT files
-
-2. **💬 Chat with Documents**
-   - Interactive Q&A with your documents  
-   - Context-aware responses using DistilBERT
-   - Conversation history tracking
-   - Confidence scoring
-
-3. **🗺️ Mindmap Generator**
-   - Visual flowchart/mindmap creation
-   - Multiple diagram styles (flowchart/mindmap)
-   - DOT format output for Graphviz rendering
-
-## 🎯 Use Cases
-
-- **📚 Research & Study**: Summarize academic papers and research documents
-- **💼 Business**: Process reports, contracts, and meeting notes  
-- **📖 Content Analysis**: Extract insights from large text documents
-- **🎓 Education**: Create study materials and visual summaries
-
-## 🔧 Technology Stack
-
-- **Frontend**: Gradio 4.0+ with custom CSS styling
-- **AI Models**: 
-  - Summarization: `facebook/bart-large-cnn` (fallback: `t5-small`)
-  - Q&A: `distilbert-base-cased-distilled-squad` (fallback: `deepset/roberta-base-squad2`)
-- **Document Processing**: PyMuPDF, python-docx
-- **Visualization**:
+## Features
+- Document Processing (PDF, DOCX, TXT)
+- AI-powered Summarization
+- Question Answering
+- Entity Recognition
+- Visual Knowledge Graph
 
 ## Quick Start
 
