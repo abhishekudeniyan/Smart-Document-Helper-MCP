@@ -1,16 +1,46 @@
+# 🧠 SmartDoc MCP - Document Intelligence App
 
-# 🧠 SmartDoc MCP Server
+A powerful multi-function document analysis tool built with **Gradio**, supporting:
 
-An intelligent document processing application powered by AI, built with Gradio and implementing Model Context Protocol (MCP) for seamless integration.
+- 📄 Document Summarization (Nebius Qwen / Pegasus fallback)
+- ❓ Question Answering
+- 🌐 Flowchart (Graphviz DOT code) generation
 
-## Features
-- Document Processing (PDF, DOCX, TXT)
-- AI-powered Summarization
-- Question Answering
-- Entity Recognition
-- Visual Knowledge Graph
+---
 
-## Quick Start
+## 🚀 Features
+
+| Functionality         | Description |
+|-----------------------|-------------|
+| 📂 File Upload        | Supports `.pdf`, `.docx`, `.txt` |
+| 📝 Direct Text Input  | Summarize or ask questions on raw text |
+| 📄 AI Summarization   | Uses **Qwen 2.5 32B (via Nebius)** or **Google Pegasus** |
+| ❓ QA on Text         | Uses `roberta-base-squad2` from HuggingFace |
+| 🌐 Flowchart Builder  | Visual summary of key points via Graphviz |
+| 🔁 Fallback Logic     | Automatically switches to Pegasus if Nebius fails |
+
+---
+
+## ⚙️ Technologies Used
+
+- [Gradio](https://gradio.app/) — UI Framework
+- [Nebius AI Studio](https://studio.nebius.com/) — Qwen summarization
+- [Transformers (Hugging Face)](https://huggingface.co/) — For Pegasus & QA
+- [Graphviz](https://graphviz.org/) — Flowchart rendering
+- [PyMuPDF (`fitz`)](https://pymupdf.readthedocs.io/) — PDF text extraction
+- [python-docx](https://python-docx.readthedocs.io/) — Word file reader
+- [OpenAI Python SDK](https://github.com/openai/openai-python) — Nebius-compatible
+
+---
+
+## 🔐 .env Configuration
+
+Create a `.env` file in your root directory with:
+
+```env
+NEBIUS_API_KEY=your_actual_api_key_here
+MODEL_ID=Qwen/Qwen2.5-32B-Instruct
+```
 
 1. Clone the repository:
 ```bash
