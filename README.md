@@ -1,13 +1,43 @@
-# SmartDoc MCP Pro
 
-A powerful document processing and analysis tool with AI capabilities.
+# 🧠 SmartDoc MCP Server
 
-## Features
-- Document Processing (PDF, DOCX, TXT)
-- AI-powered Summarization
-- Question Answering
-- Entity Recognition
-- Visual Knowledge Graph
+An intelligent document processing application powered by AI, built with Gradio and implementing Model Context Protocol (MCP) for seamless integration.
+
+## 🚀 Features
+
+### 🛠️ Three Core MCP Tools:
+
+1. **📄 Document Summarizer** 
+   - AI-powered text summarization using BART-Large-CNN
+   - Compression ratio tracking
+   - Support for PDF, DOCX, and TXT files
+
+2. **💬 Chat with Documents**
+   - Interactive Q&A with your documents  
+   - Context-aware responses using DistilBERT
+   - Conversation history tracking
+   - Confidence scoring
+
+3. **🗺️ Mindmap Generator**
+   - Visual flowchart/mindmap creation
+   - Multiple diagram styles (flowchart/mindmap)
+   - DOT format output for Graphviz rendering
+
+## 🎯 Use Cases
+
+- **📚 Research & Study**: Summarize academic papers and research documents
+- **💼 Business**: Process reports, contracts, and meeting notes  
+- **📖 Content Analysis**: Extract insights from large text documents
+- **🎓 Education**: Create study materials and visual summaries
+
+## 🔧 Technology Stack
+
+- **Frontend**: Gradio 4.0+ with custom CSS styling
+- **AI Models**: 
+  - Summarization: `facebook/bart-large-cnn` (fallback: `t5-small`)
+  - Q&A: `distilbert-base-cased-distilled-squad` (fallback: `deepset/roberta-base-squad2`)
+- **Document Processing**: PyMuPDF, python-docx
+- **Visualization**:
 
 ## Quick Start
 
@@ -32,11 +62,6 @@ sudo apt-get update && sudo apt-get install -y graphviz libgl1-mesa-glx libglib2
 python main.py
 ```
 
-The application will be available at http://localhost:7860
-
-Default credentials:
-- Username: admin
-- Password: mcp@2024
 
 ## Server Deployment
 
@@ -49,11 +74,6 @@ chmod +x launch.sh
 ```bash
 ./launch.sh
 ```
-
-## Environment Variables (Optional)
-- `GRADIO_SERVER_NAME`: Server host (default: "0.0.0.0")
-- `GRADIO_SERVER_PORT`: Server port (default: 7860)
-- `SHARE`: Enable public URL (default: false)
 
 ## System Requirements
 - Python 3.8+

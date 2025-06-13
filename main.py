@@ -10,12 +10,24 @@ import os
 import hashlib
 from typing import List, Dict
 import json
+from openai import OpenAI
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # ======================= CONFIG =======================
 SUPPORTED_EXT = [".pdf", ".docx", ".txt"]
 MAX_TOKENS = 1024
 MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB limit per file
 MAX_TOTAL_SIZE = 50 * 1024 * 1024  # 50MB total limit
+
+# API Configuration
+NEBIUS_API_KEY = os.getenv('NEBIUS_API_KEY')
+QWEN_MODEL_ID = "Qwen/Qwen2.5-32B-Instruct"
+print("🔐 NEBIUS_API_KEY loaded:", "Yes" if NEBIUS_API_KEY else "No")
+print("📦 MODEL_ID:", QWEN_MODEL_ID)
+
 
 # ================== UTILITY FUNCTIONS ==================
 def validate_file_size(file_path):
@@ -78,14 +90,41 @@ class ModelManager:
         return cls._instance
     
     def load_summarizer(self):
-        """Load summarization model"""
-        if self.summarizer is None:
+        def qwen_summarize(text):
             try:
-                self.summarizer = pipeline("summarization", model="google/pegasus-xsum")
+                print("🧠 Using Nebius Qwen summarizer...")
+                client = OpenAI(
+                    base_url="https://api.studio.nebius.com/v1/",
+                    api_key=NEBIUS_API_KEY
+                )
+
+                response = client.chat.completions.create(
+                    model=QWEN_MODEL_ID,
+                    messages=[
+                        {"role": "system", "content": "You are a helpful assistant that summarizes documents."},
+                        {
+                            "role": "user",
+                            "content": [{"type": "text", "text": f"Summarize this:\n{text}"}]
+                        }
+                    ]
+                )
+                return response.choices[0].message.content
             except Exception as e:
-                raise RuntimeError(f"Failed to load summarizer model: {str(e)}")
-        return self.summarizer
-    
+                print(f"⚠️ Nebius summarizer failed: {e}")
+                return None
+
+        def fallback_summarizer(text):
+            print("🔁 Falling back to Pegasus summarizer...")
+            if self.summarizer is None:
+                self.summarizer = pipeline("summarization", model="google/pegasus-xsum")
+            return self.summarizer(text, max_length=150, min_length=50, do_sample=False)[0]['summary_text']
+
+        def summarize(text):
+            summary = qwen_summarize(text)
+            return summary if summary else fallback_summarizer(text)
+
+        return summarize
+
     def load_qa_model(self):
         """Load question-answering model"""
         if self.qa_model is None:
@@ -205,8 +244,8 @@ def generate_summary(text):
     tokens = text[:MAX_TOKENS]
     try:
         summarizer = model_manager.load_summarizer()
-        summary = summarizer(tokens, max_length=150, min_length=50, do_sample=False)
-        return summary[0]['summary_text']
+        summary = summarizer(tokens)
+        return summary
     except Exception as e:
         return f"❗ Error generating summary: {str(e)}"
 
